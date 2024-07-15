@@ -5,7 +5,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 
 # write your username and password snapchat account
-username = "snapchat username"
+username = "your snapchat username"
 password = "password"
 
 # blocked friends list 
