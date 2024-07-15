@@ -4,65 +4,59 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 import time
 
-# Snapchat giriş bilgilerinizi tanımlayın
-username = "your_snapchat_username"
-password = "your_snapchat_password"
+# write your username and password snapchat account
+username = "snapchat username"
+password = "password"
 
-# Engellenecek arkadaşların listesi
-friends_to_block = ["friend1_username", "friend2_username", "friend3_username"]
+# blocked friends list 
+friends_to_block = ["blocked username 1, blocked username 2,"]
 
-# WebDriver'ı ayarlayın (örneğin, Chrome)
 driver = webdriver.Chrome()
 
-# Snapchat giriş sayfasını açın
 driver.get("https://web.snapchat.com")
 
-# Snapchat'e giriş yapın
-time.sleep(2)  # Sayfanın yüklenmesi için bekleyin
-
-username_input = driver.find_element(By.NAME, "username")
-username_input.send_keys(username)
-
-password_input = driver.find_element(By.NAME, "password")
-password_input.send_keys(password)
-
-login_button = driver.find_element(By.XPATH, "//button[contains(text(), 'Log In')]")
-login_button.click()
-
-# Girişin tamamlanmasını bekleyin
+# doing log in in from this moment dont touch anything in this BUT IF YOUR NETWORK SPEED IS SLOW CHANGE SLEEP TIME MORE THAN 10
 time.sleep(10)
 
-# Listedeki her bir arkadaşı engelleme
+username_input = driver.find_element(By.ID, "ai_input")
+username_input.send_keys(username)
+
+login_button = driver.find_element(By.CLASS_NAME, "sidebar_submitBtnWrapper__iIUeq")
+login_button.click()
+
+password_input = driver.find_element(By.ID, "password")
+password_input.send_keys(password)
+
+login_button = driver.find_element(By.CLASS_NAME, "sidebar_submitBtnWrapper__iIUeq")
+login_button.click()
+
+time.sleep(30)
+
+# blocking
 for friend in friends_to_block:
-    # Arkadaşı arayın
     search_input = driver.find_element(By.XPATH, "//input[@placeholder='Search']")
     search_input.clear()
     search_input.send_keys(friend)
-    time.sleep(2)  # Arama sonuçlarının yüklenmesi için bekleyin
+    time.sleep(10)  
 
-    # Arkadaşın profilini tıklayın
     friend_profile = driver.find_element(By.XPATH, f"//span[contains(text(), '{friend}')]")
     friend_profile.click()
-    time.sleep(2)
+    time.sleep(10)
 
-    # Ayarlar menüsünü açın
     settings_button = driver.find_element(By.XPATH, "//button[contains(@aria-label, 'Settings')]")
     settings_button.click()
-    time.sleep(2)
+    time.sleep(10)
 
-    # Engelleme düğmesini tıklayın
     block_button = driver.find_element(By.XPATH, "//button[contains(text(), 'Block')]")
     block_button.click()
-    time.sleep(2)
+    time.sleep(10)
 
-    # Engelleme işlemini onaylayın
     confirm_button = driver.find_element(By.XPATH, "//button[contains(text(), 'Block')]")
     confirm_button.click()
-    time.sleep(2)
+    time.sleep(10)
 
-    # Ana sayfaya geri dönün
     driver.get("https://web.snapchat.com")
-    time.sleep(5)
+    time.sleep(10)
 
-# Tarayıcıyı kapatın
+# if u want close your chrome tab dont touch last code bu if u dont want u can delete or add # before the all command on last command line
 driver.quit()
