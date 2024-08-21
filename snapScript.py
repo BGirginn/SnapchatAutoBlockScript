@@ -5,8 +5,8 @@ from selenium.webdriver.common.keys import Keys
 import time
 
 # write your username and password snapchat account
-username = "your snapchat username"
-password = "password"
+username = "bora"
+password = "bora"
 
 # blocked friends list 
 friends_to_block = ["blocked username 1, blocked username 2,"]
